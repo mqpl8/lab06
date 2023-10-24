@@ -1,0 +1,60 @@
+{%extends "database/layout.html"%}
+{% load static %} 
+
+
+{%block body%}
+<link rel="stylesheet" href="{% static 'database/details.css' %}">
+
+
+
+<h1>Student {{student.id}}</h1>
+<ul>
+    <li>First name: {{ student.Fname }}</li>
+    <li>Last name: {{ student.Lname }}</li>
+    <li>student number : {{ student.id_number }} </li>
+    <li>age: {{ student.age }}</li>
+</ul>
+
+
+<h2>Courses:</h2>
+
+<ul>
+  {% for course in student_courses %}
+          <li>{{course.course_name}}({{course.course_num}})</li>
+      {% empty %}
+          <li> you do not have any Courses to show :(</li>
+  {% endfor %}
+</ul>
+
+
+<h2>Add Course:</h2>
+
+
+<form method="POST">
+  {% csrf_token %}
+  <label for="course">Select a course:</label>
+  <select name="course" id="course">
+    {% for course in courses %}
+      <option value="{{ course.id }}">{{ course.course_num }}</option>
+    {% endfor %}
+  </select>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+
+
+
+<a href="{% url 'database:courses' %}">AddCourses</a>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<a href="{% url 'database:students' %}">AddStudent</a>
+
+{%endblock %}

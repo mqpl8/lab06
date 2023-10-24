@@ -1,0 +1,49 @@
+{%extends "database/layout.html"%}
+{% load static %} 
+
+
+{%block body%}
+<link rel="stylesheet" href="{% static 'database/courses.css' %}">
+
+
+
+
+    <h1>Courses:</h1>
+    <ul>
+        {%for course in courses%}
+        <li>{{course.course_name}}({{course.course_num}})</li>
+            
+        {% endfor %}
+    </ul>
+
+    <br>
+    <br>
+    <br>
+
+    <h2> Create new course:</h2>
+
+
+
+    <br>
+    
+
+
+    <form action="{% url 'database:courses' %}" method="post">
+        {% csrf_token %} 
+        
+        {{form}}
+
+        <input type="submit" value="Add course">
+    </form>
+
+
+
+
+    <br>
+
+    <br>
+
+
+    <a href="{% url 'database:students' %}">AddStudent</a>
+
+{%endblock %}
